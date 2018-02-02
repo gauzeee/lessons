@@ -8,15 +8,17 @@ year = gets.chomp.to_i
 
 months = [31, 28, 31, 31, 30, 31, 30, 31, 30, 31, 30, 31]
 
-if ( year % 4 == 0 && year % 100 != 0 ) || year % 400 == 0
-  months[1] = 29
+months[1] = 29 if ( year % 4 == 0 && year % 100 != 0 ) || year % 400 == 0
+
+mont_sum = 0
+i = 0
+while i < month - 1
+  mont = months[i]
+  mont_sum += mont
+  i += 1
 end
 
-months.each_with_index do |mont, index|
-  if month - 1 > index
-    day += mont
-  end
-end
+day += mont_sum
 
 
 puts "Вы выбрали #{day} день с начала года"

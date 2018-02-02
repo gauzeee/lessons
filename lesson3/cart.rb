@@ -3,14 +3,14 @@ items = {}
 loop do
   puts "Введите название товара"
   item = gets.chomp
-break if item == "стоп"
+  break if item == "стоп"
   puts "Введите цену за единицу товара"
   price = gets.chomp.to_f
   puts "Введите количество товара"
   num = gets.chomp.to_f
   items[item] = { cost: price, amount: num }
 end
-  puts items
+puts items
 
 
 sum = 0

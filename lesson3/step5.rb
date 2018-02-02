@@ -6,5 +6,4 @@ while i <= 100
   i += 5
 end
 
-
-  puts arr
+puts arr

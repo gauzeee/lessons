@@ -4,6 +4,6 @@ while (i = arr[-1] + arr[-2]) < 100
   arr << i
 end
 
-  puts arr
+puts arr
 
 
