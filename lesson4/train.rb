@@ -13,7 +13,8 @@ class Train
   end
 
   def speed_down(speed)
-    if @speed - speed > 0
+    delta_speed = @speed - speed
+    if delta_speed > 0
       @speed -= speed
     else
       @speed = 0
@@ -44,29 +45,25 @@ class Train
 
   def go_next_station
     if current_station != @route.stations.first
-     current_station.train_out(self)
-     @station_number += 1
-     current_station.train_in(self)
+      current_station.train_out(self)
+      @station_number += 1
+      current_station.train_in(self)
    end
   end
 
   def go_prev_station
     if current_station != @route.stations.last
-    current_station.train_out(self)
-    @station_number -= 1
-    current_station.train_in(self)
+      current_station.train_out(self)
+      @station_number -= 1
+      current_station.train_in(self)
     end
   end
 
   def next_station
-    if current_station != @route.stations.first
-      @route.stations[@station_number + 1]
-    end
+    @route.stations[@station_number + 1] if current_station != @route.stations.first
   end
 
   def prev_station
-    if current_station != @route.stations.last
-      @route.stations[@station_number - 1]
-    end
+    @route.stations[@station_number - 1] if current_station != @route.stations.last
   end
 end
