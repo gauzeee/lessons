@@ -1,30 +1,27 @@
 class Train
-
-  attr_reader :num, :type, :coaches, :current_speed, :i
-  attr_accessor :speed, :route
+  attr_reader :num, :type, :coaches, :speed
 
   def initialize(num, type, coaches)
     @num = num
     @type = type
     @coaches = coaches
     @speed = 0
-    @i = 0
   end
 
   def speed_up(speed)
     @speed += speed
   end
 
-  def current_speed
-    @speed
+  def speed_down(speed)
+    if @speed - speed > 0
+      @speed -= speed
+    else
+      @speed = 0
+    end
   end
 
   def stop
     @speed = 0
-  end
-
-  def coaches_sum
-    @coaches
   end
 
   def coach_in
@@ -32,34 +29,44 @@ class Train
   end
 
   def coach_out
-    @coaches -= 1 if @speed == 0
+    @coaches -= 1 if @speed == 0 && @coaches >= 1
   end
 
-  def show_route
-    route.route_list
+  def get_route(route)
+    @route = route
+    @station_number = 0
+    current_station.train_in(self)
   end
 
-  def departure_station
-    @current_station = route.route_list[0]
+  def current_station
+    @route.stations[@station_number]
   end
 
   def go_next_station
-     @i += 1
-     @current_station = route.route_list[@i]
+    if current_station != @route.stations.first
+     current_station.train_out(self)
+     @station_number += 1
+     current_station.train_in(self)
+   end
   end
 
   def go_prev_station
-    if @i >= 1
-     @i -= 1
-     @current_station = route.route_list[@i]
+    if current_station != @route.stations.last
+    current_station.train_out(self)
+    @station_number -= 1
+    current_station.train_in(self)
+    end
   end
 
   def next_station
-    puts "Следующая станция #{route.route_list[@i + 1].station_name}."
+    if current_station != @route.stations.first
+      @route.stations[@station_number + 1]
+    end
   end
 
   def prev_station
-    puts "Предидущая станция #{route.route_list[@i - 1].station_name}."
+    if current_station != @route.stations.last
+      @route.stations[@station_number - 1]
+    end
   end
-
 end

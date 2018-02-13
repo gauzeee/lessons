@@ -1,25 +1,23 @@
 class Route
-
-  attr_reader :route_list
+  attr_reader :stations
 
   def initialize(a_station, b_station)
-    @a_station = a_station
-    @b_station = b_station
-    @@route_list = []
-    @@route_list[0] = a_station
-    @@route_list[-1] = b_station
+    @stations = [a_station, b_station]
   end
 
-  def new_route_point(station_name)
-    @@route_list << station_name
+  def new_station(station)
+    @stations.insert(-2, station)
   end
 
-  def remove_route_point(station_name)
-    @@route_list.delete(station_name)
+  def remove_station(station)
+    @stations.delete(station)
   end
 
-  def route_list_display
-    @@route_list.each_with_index { |station_name| puts station_name }
+  def stations_display
+    @stations.each_with_index { |station, index| puts "#{index += 1})#{station};" }
   end
-
 end
+
+
+
+
