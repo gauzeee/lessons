@@ -26,25 +26,17 @@ class Train
   end
 
   def coach_in(coach)
-    @coaches << coach if @speed == 0
+    @coaches << coach if @speed == 0 && self.type == coach.type
   end
 
-  def coach_out
-    @coaches.pop if @speed == 0 && @coaches.any?
+  def coach_out(coach)
+    @coaches.slice!(coach) if @speed == 0 && @coaches.any?
   end
 
   def get_route(route)
     @route = route
     @station_number = 0
     current_station.train_in(self)
-  end
-
-  def route?
-    if @route != nil
-      return true
-    else
-      return false
-    end
   end
 
   def current_station
