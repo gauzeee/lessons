@@ -3,6 +3,7 @@ require_relative 'instance_counter.rb'
 require_relative 'station.rb'
 require_relative 'train.rb'
 require_relative 'route.rb'
+require_relative 'coach.rb'
 require_relative 'passengertrain.rb'
 require_relative 'passengercoach.rb'
 require_relative 'cargotrain.rb'
@@ -249,11 +250,11 @@ class Railway
         if current_train.class == CargoTrain && coach.type == "Cargo" && !coach.nil?
           current_train.coach_in(coach)
           @coaches.slice!(coach_choice - 1)
-          puts "К поезду №#{current_train.num} прицеплен один ГРУЗОВОЙ вагон. #{current_train.coaches}"
+          puts "К поезду №#{current_train.num} прицеплен один ГРУЗОВОЙ вагон."
         elsif current_train.class == PassengerTrain && coach.type == "Passenger" && !coach.nil?
           current_train.coach_in(coach)
           @coaches.slice!(coach_choice - 1)
-          puts "К поезду №#{current_train.num} прицеплен один ПАССАЖИРСКИЙ вагон. #{current_train.coaches}"
+          puts "К поезду №#{current_train.num} прицеплен один ПАССАЖИРСКИЙ вагон."
         else
           puts "Этот вагон не подойдет"
           return
