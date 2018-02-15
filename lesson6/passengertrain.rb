@@ -7,5 +7,4 @@ class PassengerTrain < Train
     @coaches = []
     @speed = 0
   end
-
 end

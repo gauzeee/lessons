@@ -11,7 +11,7 @@ end
     @station = station
     @trains = []
     register_instanse
-    sum_stations
+    station_to_all
   end
 
   def train_in(train)
@@ -28,8 +28,8 @@ end
 
   private
 
-  def sum_stations
-    self.class.all = [] if self.class.all == nil
+  def station_to_all
+    self.class.all ||= []
     self.class.all << self
   end
 end

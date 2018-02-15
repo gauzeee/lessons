@@ -1,7 +1,3 @@
-module CompanyName
-  attr_accessor :company_name
-end
-
 
 module InstanceCounter
   def self.included(base)
@@ -16,7 +12,7 @@ module InstanceCounter
   module InstanceMethods
     private
     def register_instanse
-      self.class.instances = 0 if self.class.instances == nil
+      self.class.instances ||= 0
       self.class.instances += 1
     end
   end

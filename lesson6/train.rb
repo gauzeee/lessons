@@ -4,13 +4,13 @@ class Train
 
   attr_reader :num, :type, :coaches, :speed
 
-class << self
-  attr_accessor :all
+  class << self
+    attr_accessor :all
 
-  def find(num)
-    all[num]
+    def find(num)
+      all[num]
+    end
   end
-end
 
   def initialize(num, type)
     @num = num
@@ -18,7 +18,7 @@ end
     @coaches = []
     @speed = 0
     register_instanse
-    sum_trains
+    train_to_all
   end
 
   def speed_up(speed)
@@ -82,9 +82,9 @@ end
 
   protected
 
-  def sum_trains
-    self.class.all = {} if self.class.all == nil
-    self.class.all[self.num] = self
+  def train_to_all
+    self.class.all ||= {}
+    self.class.all[num] = self
   end
 
 end
