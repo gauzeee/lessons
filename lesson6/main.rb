@@ -142,7 +142,7 @@ class Railway
     puts "Выберете номер маршрута для редактирования"
     route_index = gets.to_i
     current_route = @routes[route_index - 1]
-    if current_route != nil
+    if !current_route.nil?
       puts "Текущие станции маршрута"
       current_route.stations_display
       puts "Введите 1 для добавления станции в маршрут"
@@ -246,11 +246,11 @@ class Railway
         puts "Выберете вагон по индексу:"
         coach_choice = gets.to_i
         coach = @coaches[coach_choice - 1]
-        if current_train.class == CargoTrain && coach.type == "Cargo" && coach != nil
+        if current_train.class == CargoTrain && coach.type == "Cargo" && !coach.nil?
           current_train.coach_in(coach)
           @coaches.slice!(coach_choice - 1)
           puts "К поезду №#{current_train.num} прицеплен один ГРУЗОВОЙ вагон. #{current_train.coaches}"
-        elsif current_train.class == PassengerTrain && coach.type == "Passenger" && coach != nil
+        elsif current_train.class == PassengerTrain && coach.type == "Passenger" && !coach.nil?
           current_train.coach_in(coach)
           @coaches.slice!(coach_choice - 1)
           puts "К поезду №#{current_train.num} прицеплен один ПАССАЖИРСКИЙ вагон. #{current_train.coaches}"
@@ -308,7 +308,7 @@ class Railway
     puts "Введите индекс поезда, который поедет на другую станцию"
     num = gets.to_i
     current_train = @trains[num - 1]
-    if @trains.count >= num && @trains[num - 1] != nil
+    if @trains.count >= num && !@trains[num - 1].nil?
       puts "Введите 1 для движения на следующую станцию"
       puts "Введите 2 для движения на предыдущую станцию"
       move_choice = gets.to_i
