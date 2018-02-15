@@ -1,11 +1,24 @@
 class Train
+  include CompanyName
+  include InstanceCounter
+
   attr_reader :num, :type, :coaches, :speed
+
+class << self
+  attr_accessor :all
+
+  def find(num)
+    all[num]
+  end
+end
 
   def initialize(num, type)
     @num = num
     @type = type
     @coaches = []
     @speed = 0
+    register_instanse
+    sum_trains
   end
 
   def speed_up(speed)
@@ -66,4 +79,12 @@ class Train
   def prev_station
     @route.stations[@station_number - 1] if current_station != @route.stations.last
   end
+
+  protected
+
+  def sum_trains
+    self.class.all = {} if self.class.all == nil
+    self.class.all[self.num] = self
+  end
+
 end

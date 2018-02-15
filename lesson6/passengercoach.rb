@@ -1,4 +1,4 @@
-class PassengerCoach
+class PassengerCoach < Coach
   attr_reader :type
 
   def initialize
