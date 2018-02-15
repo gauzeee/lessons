@@ -40,7 +40,7 @@ class Railway
       elsif to_do == 3
         new_route
       elsif to_do == 4
-        redact_route
+        edit_route
       elsif to_do == 5
         get_route
       elsif to_do == 7
@@ -131,10 +131,10 @@ class Railway
       @routes.each_with_index { |route, index| puts " :#{index + 1} Маршрут #{route.route_list}"}
   end
 
-  def redact_route
+  def edit_route
     if @routes.empty?
       puts "Отсутствуют маршруты для изменения"
-    return
+      return
     end
     routes_list
     puts "Выберете номер маршрута для редактирования"
@@ -168,7 +168,6 @@ class Railway
       end
     else
       puts "Ошибка! Повторите"
-      return
     end
   end
 
@@ -219,10 +218,6 @@ class Railway
       puts "Ошибка ввода"
       return
     end
-  end
-
-  def remove_coach(coach)
-    @coaches.delete(coach)
   end
 
   def coaches_list
