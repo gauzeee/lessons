@@ -255,11 +255,11 @@ class Railway
         puts "Выберете вагон по индексу:"
         coach_choice = gets.to_i
         coach = @coaches[coach_choice - 1]
-        if current_train.class == CargoTrain && coach.type == "Cargo" && !coach.nil?
+        if current_train.class == CargoTrain && coach.type == "грузовой" && !coach.nil?
           current_train.coach_in(coach)
           @coaches.slice!(coach_choice - 1)
           puts "К поезду №#{current_train.num} прицеплен один ГРУЗОВОЙ вагон."
-        elsif current_train.class == PassengerTrain && coach.type == "Passenger" && !coach.nil?
+        elsif current_train.class == PassengerTrain && coach.type == "пассажирский" && !coach.nil?
           current_train.coach_in(coach)
           @coaches.slice!(coach_choice - 1)
           puts "К поезду №#{current_train.num} прицеплен один ПАССАЖИРСКИЙ вагон."
