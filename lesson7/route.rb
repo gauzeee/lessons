@@ -1,7 +1,7 @@
 class Route
   include InstanceCounter
 
-  attr_reader :stations, :name
+  attr_reader :stations, :name, :station
 
   def initialize(a_station, b_station)
     @stations = [a_station, b_station]
@@ -37,7 +37,7 @@ class Route
 
   def validate!
     raise "Для создания маршрута нужны станции" if @stations.empty?
-    #raise "Это не Станция" if !@stations.include?(station)
+    raise "Это не Станция" if @stations.include?(station)
     raise "В маршруте должны быть разные начальная и конечная станции" if @stations.first == @stations.last
     true
   end
