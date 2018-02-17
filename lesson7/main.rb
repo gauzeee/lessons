@@ -4,10 +4,10 @@ require_relative 'station.rb'
 require_relative 'train.rb'
 require_relative 'route.rb'
 require_relative 'coach.rb'
-require_relative 'passengertrain.rb'
-require_relative 'passengercoach.rb'
-require_relative 'cargotrain.rb'
-require_relative 'cargocoach.rb'
+require_relative 'passenger_train.rb'
+require_relative 'passenger_coach.rb'
+require_relative 'cargo_train.rb'
+require_relative 'cargo_coach.rb'
 
 class Railway
 
@@ -88,11 +88,13 @@ class Railway
       puts "Введите 2, если хотите добавить ПАССАЖИРСКИЙ поезд"
       type_choice = gets.chomp.to_i
       if type_choice == 1
-        train = CargoTrain.new(num)
+        type = "грузовой"
+        train = CargoTrain.new(num, type)
         @trains << train
         puts "Грузовой поезд #{num} успешно добавлен!"
       elsif type_choice == 2
-        train = PassengerTrain.new(num)
+        type = "пассажирский"
+        train = PassengerTrain.new(num, type)
         @trains << train
         puts "Пассажирский поезд #{num} успешно добавлен!"
       end
@@ -115,26 +117,22 @@ class Railway
       puts "Для создания маршрута нужно создать не менее двух станций"
       return
     end
-    stations_list
-    puts "Выберете номер станции отправления"
-    a_station_index = gets.to_i
-    if @stations.include?( @stations[a_station_index - 1] )
+    begin
+      stations_list
+      puts "Выберете номер станции отправления"
+      a_station_index = gets.to_i
+      @stations.include?( @stations[a_station_index - 1] )
       a_station = @stations[a_station_index - 1]
-    else
-      puts "Ошибка! Попробуйте еще."
-      return
-    end
-    puts "Выберете номер станции назначения"
-    b_station_index = gets.to_i
-    if @stations.include?( @stations[b_station_index - 1] )
+      puts "Выберете номер станции назначения"
+      b_station_index = gets.to_i
+      @stations.include?( @stations[b_station_index - 1] )
       b_station = @stations[b_station_index - 1]
-    else
-      puts "Ошибка! Попробуйте еще."
-      return
+      route = Route.new(a_station, b_station)
+      @routes << route
+      puts "Маршрут от станции #{a_station.station} до станции #{b_station.station} успешно построен."
+    rescue RuntimeError => e
+      puts e
     end
-    route = Route.new(a_station, b_station)
-    @routes << route
-    puts "Маршрут от станции #{a_station.station} до станции #{b_station.station} успешно построен."
   end
 
   def routes_list

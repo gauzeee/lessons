@@ -9,7 +9,7 @@ class Train
   class << self
     attr_accessor :all
 
-  def find(num)
+    def find(num)
       all[num]
     end
   end
@@ -19,9 +19,9 @@ class Train
     @type = type
     @coaches = []
     @speed = 0
+    validate!
     register_instanse
     train_to_all
-    validate!
   end
 
   def valid?
@@ -48,7 +48,7 @@ class Train
   end
 
   def coach_in(coach)
-    @coaches << coach if @speed == 0 && self.type == coach.type
+    @coaches << coach if @speed == 0 && type == coach.type
   end
 
   def coach_out(coach)
@@ -70,7 +70,7 @@ class Train
       current_station.train_out(self)
       @station_number += 1
       current_station.train_in(self)
-   end
+    end
   end
 
   def go_prev_station
@@ -101,5 +101,4 @@ class Train
     raise "Номер поезда должен иметь формат ХХХ-ХХ, где Х - любая буква или цифра. Символ - не обязательный." if num !~ TRAIN_NUMBER
     true
   end
-
 end

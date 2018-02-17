@@ -5,9 +5,9 @@ class Station
 
   STATION_NAME = /^[А-Я]{1}[а-я]+$/
 
-class << self
-  attr_accessor :all
-end
+  class << self
+    attr_accessor :all
+  end
 
   def initialize(station)
     @station = station

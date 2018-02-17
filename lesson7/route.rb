@@ -5,8 +5,8 @@ class Route
 
   def initialize(a_station, b_station)
     @stations = [a_station, b_station]
-    register_instanse
     validate!
+    register_instanse
   end
 
   def valid?
@@ -37,6 +37,8 @@ class Route
 
   def validate!
     raise "Для создания маршрута нужны станции" if @stations.empty?
+    #raise "Это не Станция" if !@stations.include?(station)
+    raise "В маршруте должны быть разные начальная и конечная станции" if @stations.first == @stations.last
     true
   end
 end
