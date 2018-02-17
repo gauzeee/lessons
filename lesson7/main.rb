@@ -88,13 +88,11 @@ class Railway
       puts "Введите 2, если хотите добавить ПАССАЖИРСКИЙ поезд"
       type_choice = gets.chomp.to_i
       if type_choice == 1
-        type = "грузовой"
-        train = CargoTrain.new(num, type)
+        train = CargoTrain.new(num)
         @trains << train
         puts "Грузовой поезд #{num} успешно добавлен!"
       elsif type_choice == 2
-        type = "пассажирский"
-        train = PassengerTrain.new(num, type)
+        train = PassengerTrain.new(num)
         @trains << train
         puts "Пассажирский поезд #{num} успешно добавлен!"
       end

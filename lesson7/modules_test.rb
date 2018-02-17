@@ -11,8 +11,8 @@ require_relative 'cargo_coach.rb'
 
 vsev = Station.new("Всеволожская")
 berda = Station.new("Бернгардовка")
-train11 = Train.new(NHK-12, "Passenger")
-train12 = Train.new(NBA-11, "Cargo")
+train11 = Train.new("Явин1", "пассажирский")
+train12 = Train.new("ХАН-12", "грузовой")
 route = Route.new(vsev, berda)
 puts "Станции:"
 puts Station.all
@@ -21,7 +21,7 @@ puts Station.instances
 puts "Поезда:"
 puts Train.all
 puts Train.instances
-finder = Train.find(NBA-11)
+finder = Train.find("Явин1")
 puts finder
 finder.company_name = "РЖД"
 puts finder.company_name
