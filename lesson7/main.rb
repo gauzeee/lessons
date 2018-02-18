@@ -128,14 +128,14 @@ class Railway
       route = Route.new(a_station, b_station)
       @routes << route
       puts "Маршрут от станции #{a_station.station} до станции #{b_station.station} успешно построен."
-    rescue RuntimeError => e
+    rescue Exception => e
       puts e
     end
   end
 
   def routes_list
       puts "Список текущих маршрутов:"
-      @routes.each_with_index { |route, index| puts " :#{index + 1} Маршрут #{route.route_list}"}
+      @routes.each_with_index { |route, index| puts ": #{index + 1} Маршрут #{route.route_list}"}
   end
 
   def edit_route

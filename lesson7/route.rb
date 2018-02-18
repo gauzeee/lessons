@@ -36,8 +36,8 @@ class Route
   private
 
   def validate!
-    raise "Для создания маршрута нужны станции" if @stations.empty?
-    raise "Эти обьеты не являются Станциями" if @stations.include?(a_station) && @stations.include?(b_station)
+    raise "Для создания маршрута нужны станции" if @stations.any? { |station| station.class != Station }
+    raise "Выберете существующие станции" if @stations.any? { |station| station.nil? }
     raise "В маршруте должны быть разные начальная и конечная станции" if @stations.first == @stations.last
     true
   end
