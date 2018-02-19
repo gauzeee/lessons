@@ -258,13 +258,17 @@ class Railway
     coach_num = gets.to_i
     coach = @trains[@num -1].coaches[coach_num - 1]
     if coach.class == CargoCoach
-      puts "Какой объем груза вы хоитет добавить?"
+      puts "Какой объем груза вы хотите добавить?"
       vol = gets.to_i
-      coach.take_capacity(vol)
-      puts "В вагон добавлен груз"
+      if vol > coach.free_space
+        puts "Не достаточно места"
+      else
+        puts "Груз добавлен в вагон"
+        coach.take_space(vol)
+      end
     elsif coach.class == PassengerCoach
-      coach.take_seat
-      puts "В вагоне один новый пассажир"
+      coach.take_space
+      puts "В вагоне один новый пассажир" if coach.free_space > 0
     end
   end
 
@@ -381,7 +385,7 @@ class Railway
       station_look = gets.to_i
       puts "На стации #{@stations[station_look - 1].station} находятся:"
       @stations[station_look - 1].station_trains_list do |train|
-          puts "Поезд №#{train.num} #{train.type} #{train.coaches.count} вагон(ов)"
+      puts "Поезд №#{train.num} #{train.type} #{train.coaches.count} вагон(ов)"
      end
     end
   end
