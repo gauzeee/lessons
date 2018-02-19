@@ -1,5 +1,5 @@
 class Coach
-  attr_reader :type
+  attr_reader :type, :busy_space
 
   include CompanyName
 
@@ -10,14 +10,10 @@ class Coach
   end
 
   def take_space(vol)
-    @busy_space += vol if vol <= @free_space
+    @busy_space += vol if vol <= free_space
   end
 
   def free_space
-    @free_space = @space - @busy_space
-  end
-
-  def busy_space
-    @busy_space
+    @space - @busy_space
   end
 end
