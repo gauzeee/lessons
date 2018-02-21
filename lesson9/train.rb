@@ -70,19 +70,17 @@ class Train
   end
 
   def go_next_station
-    if current_station != @route.stations.last
-      current_station.train_out(self)
-      @station_number += 1
-      current_station.train_in(self)
-    end
+    return if current_station == @route.stations.last
+    current_station.train_out(self)
+    @station_number += 1
+    current_station.train_in(self)
   end
 
   def go_prev_station
-    if current_station != @route.stations.first
-      current_station.train_out(self)
-      @station_number -= 1
-      current_station.train_in(self)
-    end
+    return if current_station == @route.stations.first
+    current_station.train_out(self)
+    @station_number -= 1
+    current_station.train_in(self)
   end
 
   def next_station

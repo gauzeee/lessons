@@ -52,10 +52,14 @@ class Railway
     choose_route unless @trains.empty?
     train_current_route = @routes[route_index - 1]
     @trains[train_index - 1].get_route(train_current_route)
-    puts " route #{train_current_route.route_list}gets to"
-    puts "train #{@trains[train_index - 1].num}"
+    who_get_route(train_current_route)
   rescue StandardError => e
     puts e
+  end
+
+  def who_get_route(train_current_route)
+    puts " route #{train_current_route.route_list}gets to"
+    puts "train #{@trains[train_index - 1].num}"
   end
 
   def coaches_list
@@ -76,7 +80,6 @@ class Railway
       puts "Free: #{coach.free_space};"
       puts "Busy: #{coach.busy_space};"
     end
-  rescue StandardError => e
   end
 
   def fill_coach
@@ -84,10 +87,14 @@ class Railway
     puts 'Choose coach number to add passenger or cargo:'
     coach_num = gets.to_i
     coach = @trains[@train_index - 1].coaches[coach_num - 1]
-    fill_cargo_coach if coach.class == CargoCoach
-    fill_passenger_coach if coach.class == PassengerCoach
+    fill_right(coach)
   rescue StandardError => e
     puts e
+  end
+
+  def fill_right(coach)
+    fill_cargo_coach if coach.class == CargoCoach
+    fill_passenger_coach if coach.class == PassengerCoach
   end
 
   def move_train
@@ -103,15 +110,19 @@ class Railway
     where_is_train
   end
 
+  def trains_coaches_list(station_look)
+    puts "Trains on #{@stations[station_look - 1].station}:"
+    @stations[station_look - 1].station_trains_list do |train|
+      puts "Train №#{train.num} #{train.type} #{train.coaches.count} coaches"
+    end
+  end
+
   def trains_on_station_list
     puts 'Stations list:'
     stations_list
     puts 'Choose station index to look trains list'
     station_look = gets.to_i
-    puts "Trains on #{@stations[station_look - 1].station}:"
-    @stations[station_look - 1].station_trains_list do |train|
-      puts "Train №#{train.num} #{train.type} #{train.coaches.count} coaches"
-    end
+    trains_coaches_list(station_look)
   end
 end
 
