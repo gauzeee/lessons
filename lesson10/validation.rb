@@ -8,10 +8,10 @@ module Validation
     module ClassMethods
       attr_reader :validation_sets
 
-      def validate(name, valid_type, sets = nil)
+      def validate(name, valid_type, params = nil)
         @validation_sets = {}
         @validation_sets[name] = []
-        @validation_sets[name] << { valid_type: valid_type, sets: sets }
+        @validation_sets[name] << { valid_type: valid_type, params: params }
       end
     end
 
@@ -22,16 +22,16 @@ module Validation
         false
       end
 
-      def presence_validation(attr_name, *)
-        raise 'No attribute name' if attr_name.nil? || attr_name == ''
+      def presence_validation(attr_value, *)
+        raise 'No attribute name' if attr_value.nil? || attr_value == ''
       end
 
-      def format_validation(attr_name, format)
-        raise 'Wrong format' if attr_name !~ format
+      def format_validation(attr_value, format)
+        raise 'Wrong format' if attr_value !~ format
       end
 
-      def type_validation(attr_name, type)
-        raise 'Wrong type' if attr_name.is_a?(type)
+      def type_validation(attr_value, type)
+        raise 'Wrong type' unless attr_value.is_a?(type)
       end
 
       def validate!
@@ -39,7 +39,7 @@ module Validation
           attr_name = instance_variable_get("@#{name}".to_sym)
           valid.each do |validation|
             method_is = "#{validation[:valid_type]}_validation".to_sym
-            send(method_is, attr_name, validation[:sets])
+            send(method_is, attr_value, validation[:params])
           end
         end
       end

@@ -17,6 +17,8 @@ class Train
     end
   end
 
+  validate :num, :type, String
+
   def initialize(num, type)
     @num = num
     @type = type
@@ -26,12 +28,6 @@ class Train
     register_instanse
     train_to_all
   end
-
-  # def valid?
-  #  validate!
-  # rescue StandardError
-  #  false
-  # end
 
   def train_coaches_list
     @coaches.each_with_index { |index, coach| yield(index, coach) }
@@ -100,10 +96,4 @@ class Train
     self.class.all ||= {}
     self.class.all[num] = self
   end
-
-  # def validate!
-  #  raise 'Number can`t be empty' if num.nil?
-  # raise 'Invalid format! Use XXX-XX format.' if num !~ TRAIN_NUMBER
-  # true
-  # end
 end

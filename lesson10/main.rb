@@ -32,7 +32,7 @@ class Railway
 
   def stations_list
     @stations.each_with_index do |stat, index|
-      puts "Station №#{index + 1}: #{stat.station}"
+      puts "Station №#{index + 1}: #{stat.name}"
     end
   end
 
@@ -113,7 +113,7 @@ class Railway
   end
 
   def trains_coaches_list(station_look)
-    puts "Trains on #{@stations[station_look - 1].station}:"
+    puts "Trains on #{@stations[station_look - 1].name}:"
     @stations[station_look - 1].station_trains_list do |train|
       puts "Train №#{train.num} #{train.type} #{train.coaches.count} coaches"
     end
@@ -129,4 +129,4 @@ class Railway
 end
 
 railway_system = Railway.new
-# railway_system.menu
+railway_system.menu

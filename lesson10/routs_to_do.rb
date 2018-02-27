@@ -7,7 +7,7 @@ module RoutsToDo
     stations_to_rout
     route = Route.new(a_station, b_station)
     @routes << route
-    puts "Route #{a_station.station} - #{b_station.station} added."
+    puts "Route #{a_station.name} - #{b_station.name} added."
   rescue StandardError => e
     puts e
   end

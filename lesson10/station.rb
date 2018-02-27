@@ -6,7 +6,7 @@ class Station
   include Validation
   include Accessors
 
-  attr_accessor_with_history :station, :trains
+  attr_accessor_with_history :name, :trains
 
   STATION_NAME = /^[A-Z]{1}[a-z]+$/
 
@@ -14,22 +14,16 @@ class Station
     attr_accessor :all
   end
 
-  validate :station, :presence
-  validate :station, :format, STATION_NAME
+  validate :name, :presence
+  validate :name, :format, STATION_NAME
 
-  def initialize(station)
-    @station = station
+  def initialize(name)
+    @name = name
     @trains = []
     validate!
     register_instanse
     station_to_all
   end
-
-  # def valid?
-  #  validate!
-  # rescue StandardError
-  #  false
-  # end
 
   def station_trains_list
     @trains.each { |train| yield(train) }
@@ -50,12 +44,6 @@ class Station
   end
 
   private
-
-  # def validate!
-  #  raise 'Name can`t be empty' if station.nil?
-  #  raise 'Name must have capital letter first' if station !~ STATION_NAME
-  #  true
-  # end
 
   def station_to_all
     self.class.all ||= []

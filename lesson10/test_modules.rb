@@ -22,12 +22,12 @@ moscow = Station.new('Moscow')
 railway.stations << moscow
 moon = Station.new('Moon')
 railway.stations << moon
-tr1 = CargoTrain.new('BPA-12')
+tr1 = Train.new('BPA-12', 'cargo')
 tr1.driver = 'Nemo'
 puts tr1.driver
 route = Route.new(moscow, moon)
 station_test = railway.stations[0]
-station_test.station = 'Niobo'
-station_test.station = 'Newyork'
-station_test.station = 'Newyorker'
-puts station_test.station_history
+station_test.name = 'Niobo'
+station_test.name = 'Newyork'
+station_test.name = 'Newyorker'
+puts station_test.name_history
