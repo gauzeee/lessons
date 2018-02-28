@@ -31,23 +31,23 @@ module CoachToDo
   def new_cargo_coach
     puts 'Enter volume of new coach'
     vol = gets.to_i
-    coach = CargoCoach.new(vol)
+    coach = Coach.new('cargo', vol)
     @coaches << coach
     puts "There are new CARGO coach for #{coach.free_space} litres."
   end
 
   def cargo?
-    current_train.class == CargoTrain && coach.type == 'cargo'
+    current_train.type == 'cargo' && coach.type == 'cargo'
   end
 
   def passenger?
-    current_train.class == PassengerTrain && coach.type == 'passenger'
+    current_train.type == 'passenger' && coach.type == 'passenger'
   end
 
   def new_passenger_coach
     puts 'Enter number of seats'
     seat = gets.to_i
-    coach = PassengerCoach.new(seat)
+    coach = Coach.new('passenger', seat)
     @coaches << coach
     puts "There are new PASSENGER coach for #{coach.free_space} seats"
   end

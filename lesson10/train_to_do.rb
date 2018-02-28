@@ -1,6 +1,6 @@
 module TrainToDo
   attr_reader :num, :train_index, :coach_index,
-              :current_train, :coach, :move_choice
+              :current_train, :coach, :move_choice, :type
 
   def new_train_in
     puts 'Enter number of new train'
@@ -8,8 +8,8 @@ module TrainToDo
     puts 'Choose 1 to add CARGO train'
     puts 'Choose 2 to add PASSENGER train'
     type_choice = gets.chomp.to_i
-    train = CargoTrain.new(@num) if type_choice == 1
-    train = PassengerTrain.new(@num) if type_choice == 2
+    train = Train.new(@num, 'cargo') if type_choice == 1
+    train = Train.new(@num, 'passenger') if type_choice == 2
     @trains << train
   end
 

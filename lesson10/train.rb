@@ -18,6 +18,8 @@ class Train
   end
 
   validate :num, :type, String
+  validate :num, :presence
+  validate :num, :format, TRAIN_NUMBER
 
   def initialize(num, type)
     @num = num
